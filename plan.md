@@ -474,10 +474,19 @@ Final comparison table:
 
 | Model | Accuracy | Precision | Recall | F1 | ROC-AUC | CV Mean | CV Std |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| KNN | | | | | | | |
-| Logistic Regression | | | | | | | |
-| Decision Tree | | | | | | | |
-| Random Forest | | | | | | | |
+| Logistic Regression | 0.832 | 0.851 | 0.843 | 0.847 | 0.913 | 0.827 | 0.035 |
+| Random Forest | 0.810 | 0.832 | 0.824 | 0.828 | 0.905 | 0.833 | 0.036 |
+| KNN | 0.848 | 0.843 | 0.892 | 0.867 | 0.902 | 0.851 | 0.028 |
+| Decision Tree | 0.761 | 0.774 | 0.804 | 0.788 | 0.756 | 0.760 | 0.021 |
+
+Result interpretation:
+
+```text
+Logistic Regression was best by ROC-AUC.
+KNN was best by accuracy and F1-score.
+Random Forest was strong but not the best overall model.
+Decision Tree performed weakest, which is expected because a single tree is less stable than ensemble or distance/linear methods.
+```
 
 Main evaluation rule:
 
@@ -568,7 +577,7 @@ Models:
 KNN, Logistic Regression, Decision Tree, Random Forest.
 
 Results:
-The models were selected using cross-validation and evaluated on the untouched test set.
+Logistic Regression achieved the best ROC-AUC, KNN achieved the best accuracy and F1-score, Random Forest also performed strongly, and Decision Tree was the weakest model.
 
 Insight:
 Chest pain type, maximum heart rate, exercise-induced angina, oldpeak, thalassemia result, and major vessels were important predictors.
@@ -584,7 +593,10 @@ Machine learning can support early heart disease risk prediction.
 Use this as your core conclusion:
 
 ```text
-Among the four models tested, Random Forest achieved the best overall performance because it captured nonlinear relationships between medical features and heart disease diagnosis. The experiment used a stratified train/test split, cross-validation for model selection, and final evaluation on an untouched test set. The most influential features were chest pain type, maximum heart rate, exercise-induced angina, oldpeak, thalassemia result, and number of major vessels. The project demonstrates that machine learning can be used as a decision-support tool for early heart disease prediction.
+Among the four models tested, Logistic Regression achieved the best ROC-AUC, while KNN achieved the best accuracy and F1-score. Random Forest also performed strongly, but it was not the overall best model in this experiment. These results suggest that the cleaned heart disease dataset is small, structured, and well-preprocessed enough for simpler models to perform very well. The experiment used a stratified train/test split, cross-validation for model selection, and final evaluation on an untouched test set. The project demonstrates that machine learning can be used as a decision-support tool for early heart disease prediction.
 ```
 
-This plan is stronger than the first version because it is based on the real cleaned dataset and includes a proper train, cross-validation, and test workflow.
+This plan is stronger than the first version because it is based on the real cleaned dataset, uses a proper train/cross-validation/test workflow, and reports the actual model results honestly.
+
+
+

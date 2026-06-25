@@ -1,0 +1,4 @@
+model,fpr,tpr
+Decision Tree,0.0,0.0
+Decision Tree,0.2926829268292683,0.803921568627451
+Decision Tree,1.0,1.0
