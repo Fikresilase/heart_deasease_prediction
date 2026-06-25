@@ -98,6 +98,7 @@ heart-disease-ml-project/
 |   |-- 06_decision_tree.ipynb
 |   |-- 07_random_forest.ipynb
 |   |-- 08_model_comparison.ipynb
+|   |-- 09_baseline_and_pca.ipynb
 |
 |-- figures/
 |   |-- target_distribution.png
@@ -112,6 +113,8 @@ heart-disease-ml-project/
 |   |-- feature_importance.png
 |   |-- roc_curves.png
 |   |-- model_comparison.png
+|   |-- baseline_comparison.png
+|   |-- pca_explained_variance.png
 |   |-- confusion_matrix_knn.png
 |   |-- confusion_matrix_logistic.png
 |   |-- confusion_matrix_tree.png
@@ -123,6 +126,8 @@ heart-disease-ml-project/
 |   |-- decision_tree_metrics.csv
 |   |-- random_forest_metrics.csv
 |   |-- final_model_comparison.csv
+|   |-- baseline_metrics.csv
+|   |-- pca_model_comparison.csv
 |
 |-- models/
 |   |-- preprocessing_pipeline.pkl
@@ -454,6 +459,73 @@ figures/model_comparison.png
 figures/roc_curves.png
 ```
 
+
+---
+
+## Step 9: `09_baseline_and_pca.ipynb`
+
+Do:
+
+```text
+Load heart_final.csv
+Train DummyClassifier baseline
+Compare baseline with KNN, Logistic Regression, Decision Tree, and Random Forest
+Run PCA on training data only
+Test models using PCA-transformed features
+Compare PCA results with original feature results
+Decide whether PCA improves performance
+Run an extra experiment without dataset source features
+Save baseline and PCA metrics
+```
+
+Baseline model:
+
+```text
+DummyClassifier using the most frequent class strategy
+```
+
+PCA rule:
+
+```text
+Fit PCA only on X_train.
+Transform X_train and X_test separately.
+Do not fit PCA on the full dataset.
+```
+
+Dataset-source experiment:
+
+```text
+Remove encoded dataset source columns such as dataset_cleveland, dataset_hungary, dataset_switzerland, and dataset_va long beach.
+Retrain selected models to check whether predictions depend too much on source location.
+Use this as an interpretation and fairness/leakage discussion, not necessarily as the final model.
+```
+
+Visuals:
+
+```text
+Baseline comparison bar chart
+PCA explained variance chart
+Original features vs PCA model comparison
+Dataset-source experiment comparison chart
+```
+
+Outputs:
+
+```text
+results/baseline_metrics.csv
+results/pca_model_comparison.csv
+figures/pca_explained_variance.png
+figures/baseline_comparison.png
+```
+
+Why this step matters:
+
+```text
+The baseline proves the ML models perform better than a naive classifier.
+PCA satisfies the dimensionality reduction requirement.
+The no-dataset-source experiment checks whether source location affects the results too strongly.
+```
+
 ---
 
 # 3. Metrics to Use
@@ -510,17 +582,21 @@ Your LaTeX report should look like this:
 6. Train/Test Split Strategy
 7. Exploratory Data Analysis
 8. Feature Engineering
-9. Machine Learning Models
-   9.1 KNN
-   9.2 Logistic Regression
-   9.3 Decision Tree
-   9.4 Random Forest
-10. Experimental Setup
-11. Results and Discussion
-12. Model Comparison
-13. Conclusion
-14. Future Work
-15. References
+9. Feature Importance Discussion
+10. Baseline Comparison
+11. Dimensionality Reduction using PCA
+12. Experiment Without Dataset Source Feature
+13. Machine Learning Models
+   13.1 KNN
+   13.2 Logistic Regression
+   13.3 Decision Tree
+   13.4 Random Forest
+14. Experimental Setup
+15. Results and Discussion
+16. Model Comparison
+17. Conclusion
+18. Future Work
+19. References
 ```
 
 ---
@@ -539,6 +615,8 @@ Include these:
 7. Confusion matrix for each model
 8. ROC curve comparison
 9. Model performance bar chart
+10. Baseline comparison chart
+11. PCA explained variance chart
 ```
 
 The most impressive ones:
@@ -549,6 +627,8 @@ Random Forest feature importance
 Correlation heatmap
 Model comparison bar chart
 Train/test/cross-validation workflow diagram
+Baseline comparison chart
+PCA explained variance chart
 ```
 
 ---
@@ -576,6 +656,15 @@ Categorical medical features were encoded, numerical features were scaled, and p
 Models:
 KNN, Logistic Regression, Decision Tree, Random Forest.
 
+Baseline:
+DummyClassifier was added to prove the machine learning models perform better than a naive majority-class classifier.
+
+Dimensionality Reduction:
+PCA was tested on training data only and compared with the original feature results.
+
+Dataset Source Check:
+An extra experiment without dataset source features was added to check whether source location affects the results too strongly.
+
 Results:
 Logistic Regression achieved the best ROC-AUC, KNN achieved the best accuracy and F1-score, Random Forest also performed strongly, and Decision Tree was the weakest model.
 
@@ -597,6 +686,7 @@ Among the four models tested, Logistic Regression achieved the best ROC-AUC, whi
 ```
 
 This plan is stronger than the first version because it is based on the real cleaned dataset, uses a proper train/cross-validation/test workflow, and reports the actual model results honestly.
+
 
 
 
